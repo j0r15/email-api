@@ -20,10 +20,10 @@ app.use(routes)
 routes.post('/mail', async (req, res) => {
   try {
     //these are attributtes inputted by the user
-    const { email, subject, message } = req.body
+    const { email_to, subject, message } = req.body
 
     await transport.sendMail({
-      to: `${email}`,
+      to: `${email_to}`,
       subject: `${subject}`,
       text: `${message}`
     })
