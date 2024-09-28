@@ -25,7 +25,7 @@ routes.post('/mail', async (req, res) => {
     await transport.sendMail({
       to: `${email_to}`,
       subject: `${subject}`,
-      from: process.env.SENDER_NAME,
+      from: `${process.env.SENDER_NAME} <${process.env.EMAIL_FROM}>`,
       text: `${message}`
     })
     //status 200 means our request was successful
