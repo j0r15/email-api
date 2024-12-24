@@ -29,7 +29,7 @@ routes.post('/mail', async (req, res) => {
       subject: `${subject}`,
       from: `${process.env.SENDER_NAME} <${process.env.EMAIL_FROM}>`,
       text: `${message}`,
-      attachments: `${attachments}`,
+      attachments: attachments,
     };
 
     await transport.sendMail(email)
