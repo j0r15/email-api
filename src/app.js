@@ -20,13 +20,14 @@ app.use(routes)
 routes.post('/mail', async (req, res) => {
   try {
     //these are attributtes inputted by the user
-    const { email_to, subject, message } = req.body
+    const { email_to, subject, message, attachments } = req.body
 
     await transport.sendMail({
       to: `${email_to}`,
       subject: `${subject}`,
       from: `${process.env.SENDER_NAME} <${process.env.EMAIL_FROM}>`,
-      text: `${message}`
+      text: `${message}`,
+      attachments: `${attachments}`,
     })
     //status 200 means our request was successful
     res.status(200).json({ message: "Successfully sent message" })
