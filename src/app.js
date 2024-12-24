@@ -24,17 +24,23 @@ routes.post('/mail', async (req, res) => {
 
     const attachments = req.body.attachments ? req.body.attachments : null;
 
-    await transport.sendMail({
+    const email = {
       to: `${email_to}`,
       subject: `${subject}`,
       from: `${process.env.SENDER_NAME} <${process.env.EMAIL_FROM}>`,
       text: `${message}`,
       attachments: `${attachments}`,
-    })
+    };
+
+    await transport.sendMail(email)
+
+    if (process.env.DEBUG === true) console.log(email)
+
     //status 200 means our request was successful
     res.status(200).json({ message: "Successfully sent message" })
   } catch (e) {
     res.status(400).json(e.message)
+    if (process.env.DEBUG === true) console.log(email)
   }
 })
 
