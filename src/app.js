@@ -2,7 +2,6 @@ const express = require('express')
 const { transport } = require('./config/mailer.config')
 const cors = require('cors')
 require('dotenv').config()
-
 const app = express()
 
 const routes = express.Router()
@@ -13,7 +12,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 //this will parse json bodies from requests
-app.use(express.json())
+app.use(express.json({ limit: '10mb' }))
 app.use(routes)
 
 //this is the default post route for users' form submit
